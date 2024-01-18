@@ -5,6 +5,10 @@
 
   Copyright (c) SoftSec Lab. @ KAIST, since 2016
 
+  lamg.FsReadLine - a GNU readline implementation in F#.
+
+  Copyright 2024 Luis Ángel Méndez Gort
+
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
   in the Software without restriction, including without limitation the rights
@@ -24,39 +28,38 @@
   SOFTWARE.
 *)
 
-namespace B2R2.FsReadLine
+namespace lamg.FsReadLine
 
 open System.Text
 
-type History = private {
-  FwdList: string list
-  BwdList: string list
-}
-with
-  static member Init () =
-    { FwdList = []; BwdList = [] }
+type History =
+  private
+    { FwdList: string list
+      BwdList: string list }
+
+  static member Init() = { FwdList = []; BwdList = [] }
 
   static member Add history cmd =
-    { history with BwdList = cmd :: history.BwdList }
+    { history with
+        BwdList = cmd :: history.BwdList }
 
-type ReadLineContext = {
-  mutable Prompt: string
-  mutable CursorPos: int
-  mutable CursorLim: int
-  mutable History: History
-  TabInfo: TabCompletionInfo
-  Builder: StringBuilder
-}
-with
+type ReadLineContext =
+  { mutable Prompt: string
+    mutable CursorPos: int
+    mutable CursorLim: int
+    mutable History: History
+    TabInfo: TabCompletionInfo
+    Builder: StringBuilder }
+
   static member Init prompt cmds =
     { Prompt = prompt
       CursorPos = 0
       CursorLim = 0
-      History = History.Init ()
+      History = History.Init()
       TabInfo = TabCompletion.init cmds
-      Builder = StringBuilder () }
+      Builder = StringBuilder() }
 
   static member Clear ctxt =
     ctxt.CursorPos <- 0
     ctxt.CursorLim <- 0
-    ctxt.Builder.Clear () |> ignore
+    ctxt.Builder.Clear() |> ignore

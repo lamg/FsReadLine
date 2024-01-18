@@ -7,6 +7,8 @@
 *.user
 *.sln.docstates
 .leu
+*.sublime-project
+*.sublime-workspace
 
 .DS_Store
 
@@ -20,3 +22,4 @@
 **/AssemblyInfo.fs
 
 build/
+nupkg

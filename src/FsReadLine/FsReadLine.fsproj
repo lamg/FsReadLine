@@ -1,14 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+    <TargetFramework>net8.0</TargetFramework>
+    <RollForward>major</RollForward>
+    <Version>0.0.1</Version>
+    <PackageOutputPath>./nupkg</PackageOutputPath>
     <IsPackable>true</IsPackable>
     <IsTestProject>false</IsTestProject>
-    <PackageId>B2R2.FsReadLine</PackageId>
+    <PackageId>lamg.FsReadLine</PackageId>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-    <PackageIcon>b2r2-240x240.png</PackageIcon>
-    <RepositoryUrl>https://github.com/B2R2-org/FsReadLine</RepositoryUrl>
+    <RepositoryUrl>https://github.com/lamg/FsReadLine</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <InvariantGlobalization>true</InvariantGlobalization>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,7 +21,7 @@
     <Compile Include="ReadLine.fs" />
     <Compile Include="Library.fs" />
     <None Include="..\..\LICENSE.md" Pack="true" PackagePath=""/>
-    <None Include="b2r2-240x240.png" Pack="true" PackagePath=""/>
+    <None Include="..\..\README.md" Pack="true" PackagePath=""/>
   </ItemGroup>
 
 </Project>

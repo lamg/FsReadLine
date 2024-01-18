@@ -5,6 +5,10 @@
 
   Copyright (c) SoftSec Lab. @ KAIST, since 2016
 
+  lamg.FsReadLine - a GNU readline implementation in F#.
+
+  Copyright 2024 Luis Ángel Méndez Gort
+
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
   in the Software without restriction, including without limitation the rights
@@ -23,15 +27,13 @@
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.
 *)
+namespace lamg.FsReadLine
 
-namespace B2R2.FsReadLine
-
-type Console (prompt, cmds) =
+type Console(prompt, cmds) =
   let mutable ctxt = ReadLineContext.Init prompt cmds
 
   /// Update prompt string on the fly.
-  member __.UpdatePrompt str =
-    ctxt <- { ctxt with Prompt = str }
+  member __.UpdatePrompt str = ctxt <- { ctxt with Prompt = str }
 
   /// Set cancel key (ctrl+c) handler. The handler takes an event sender object
   /// as input and returns a boolean as output. When the handler returns false,
@@ -39,5 +41,4 @@ type Console (prompt, cmds) =
   member __.SetCancelKeyHandler handler =
     ReadLine.addCancelEventHandler ctxt handler
 
-  member __.ReadLine () =
-    ReadLine.read ctxt
+  member __.ReadLine() = ReadLine.read ctxt

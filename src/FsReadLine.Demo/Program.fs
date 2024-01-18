@@ -5,6 +5,10 @@
 
   Copyright (c) SoftSec Lab. @ KAIST, since 2016
 
+  lamg.FsReadLine - a GNU readline implementation in F#.
+
+  Copyright 2024 Luis Ángel Méndez Gort
+
   Permission is hereby granted, free of charge, to any person obtaining a copy
   of this software and associated documentation files (the "Software"), to deal
   in the Software without restriction, including without limitation the rights
@@ -26,12 +30,16 @@
 
 [<EntryPoint>]
 let main _ =
-  let cmds = ["help"; "hello"; "world"; "git"; "git init"; "git add"]
-  let console = B2R2.FsReadLine.Console ("> ", cmds)
-  console.SetCancelKeyHandler (fun _ -> true)
+  let cmds = [ "help"; "hello"; "world"; "git"; "git init"; "git add" ]
+  let console = lamg.FsReadLine.Console("> ", cmds)
+  console.SetCancelKeyHandler(fun _ -> true)
+
   let rec loop () =
-    let line = console.ReadLine ()
-    printfn " [%s]" line
-    if line = "q" then () else loop ()
+    match console.ReadLine() with
+    | Some line ->
+      printfn " [%s]" line
+      loop ()
+    | _ -> ()
+
   loop ()
   0 // return an integer exit code
