@@ -62,7 +62,7 @@ module internal TabCompletion =
 
   let candidates info input =
     if String.length input = 0 then
-      []
+      info.PrefixMap.Values |> Seq.toList |> List.concat
     else
       let prefix = input.[0]
 
